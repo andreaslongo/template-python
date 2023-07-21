@@ -1,4 +1,5 @@
-from hello_world import hello_world
+from hello_world.lib import hello_world
+
 
 def main():
     print(hello_world())

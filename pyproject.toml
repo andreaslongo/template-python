@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 # See more keys and their definitions at https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
 
 [project]
-name = "python_template"
+name = "hello_world"
 version = "2023.07.21"
 classifiers = ["Private :: Do Not Upload"]
 
