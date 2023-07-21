@@ -8,6 +8,10 @@ def main():
     parser = argparse.ArgumentParser()
     commands = parser.add_subparsers(dest="command", title="commands")
     commands.add_parser(
+        "build",
+        help="Builds the package.",
+    )
+    commands.add_parser(
         "clippy",
         help="Checks a package to catch common mistakes and improve your Python code.",
     )
@@ -22,6 +26,8 @@ def main():
     )
     args = parser.parse_args()
 
+    if args.command == "build":
+        subprocess.run(("python3", "-m", "pipx", "run", "build"))
     if args.command == "clippy":
         subprocess.run((".nox/dev/bin/ruff", "check", "."))
     if args.command == "dev":
