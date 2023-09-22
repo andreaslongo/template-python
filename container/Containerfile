@@ -30,4 +30,7 @@ RUN set -o errexit \
     set -o xtrace \
     && python -m pip install --user pipx \
     && python -m pipx ensurepath \
-    && pipx run nox --version
+    && python -m pipx run nox --version
+
+# Start with bash instead of Python repl.
+CMD /bin/bash

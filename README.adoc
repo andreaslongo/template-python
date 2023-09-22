@@ -1,22 +1,23 @@
-= Python: Template
+= Template: Python
 
-// TODO
 == Contributing
 
-If you have the Podman container manager available, the best way to get started is to build and start a local dev container.
+The best way to get started is to build and run a local dev container.
 
+You can use https://podman.io[Podman] or any other OCI compliant container manager.
+The dev container has all the required dependencies for working with the project.
+
+[source, bash]
 ----
 container/build.sh
 container/run.sh
 ----
 
-The dev container will have all the required dependencies available to get started.
+Inside the container, use `nox` to run some workflows.
 
-Inside the container, use nox for your workflows.
-
+[source, bash]
 ----
-nox (create dev venv)
-nox test
-nox lint
-...
+pipx run nox dev   # Create a dev venv
+pipx run nox test  # run tests
+pipx run nox lint  # run linters
 ----
