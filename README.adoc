@@ -17,7 +17,7 @@ Inside the container, use `nox` to run some workflows.
 
 [source, bash]
 ----
-pipx run nox dev   # Create a dev venv
-pipx run nox test  # run tests
-pipx run nox lint  # run linters
+pipx run nox -s dev   # Create a dev venv
+pipx run nox -s test  # run tests
+pipx run nox -s lint  # run linters
 ----
