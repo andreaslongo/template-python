@@ -16,6 +16,6 @@ podman container attach "$(basename ${parent_dir})" 2>/dev/null || podman contai
     --tty \
     --user ${uid}:${gid} \
     --userns keep-id:uid=${uid},gid=${gid} \
-    --volume "${parent_dir}":/home/appuser/app:Z,rw \
-    --workdir /home/appuser/app \
+    --volume "${parent_dir}:/home/appuser/$(basename ${parent_dir}):Z,rw" \
+    --workdir "/home/appuser/$(basename ${parent_dir})" \
         localhost/"$(basename ${parent_dir})":latest
