@@ -1,4 +1,6 @@
-= Template: Python
+= Template: Python (short description)
+
+== Getting started
 
 == Contributing
 
@@ -13,7 +15,7 @@ container/build.sh
 container/run.sh
 ----
 
-Inside the container, use `nox` to run some workflows.
+From inside the container, you can then run some workflows.
 
 [source, bash]
 ----
@@ -21,3 +23,9 @@ pipx run nox -s dev   # Create a dev venv
 pipx run nox -s test  # run tests
 pipx run nox -s lint  # run linters
 ----
+
+== License
+
+Copyright (C) 2023 Andreas Longo
+
+GNU General Public License v3.0 or later
