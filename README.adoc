@@ -1,6 +1,4 @@
-= Python: Template
-
-Short description.
+= Python: Template (short description)
 
 == Getting started
 
