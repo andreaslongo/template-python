@@ -26,6 +26,6 @@ pipx run nox -s lint  # run linters
 
 == License
 
-Copyright (C) 2023 Andreas Longo
+Copyright (C) 2024 Andreas Longo
 
 GNU General Public License v3.0 or later
