@@ -16,7 +16,7 @@ lint = ["black", "ruff; platform_machine != 'aarch64'"]
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 
-[tool.ruff]
+[tool.ruff.lint]
 # Enable flake8-bugbear (`B`) rules.
 select = ["E", "F", "B"]
 
