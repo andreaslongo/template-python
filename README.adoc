@@ -1,6 +1,19 @@
-= Python: Template (short description)
+= Template: Python
+
+(short description)
 
 == Getting started
+
+== Features
+
+== Changelog
+
+All notable changes will be documented here.
+
+The format is based on https://keepachangelog.com/en/1.1.0/[Keep a Changelog],
+and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
+
+=== [Unreleased]
 
 == Contributing
 
@@ -9,20 +22,24 @@ The best way to get started is to build and run a local dev container.
 You can use https://podman.io[Podman] or any other OCI compliant container manager.
 The dev container has all the required dependencies for working with the project.
 
-[source, bash]
+[,console]
 ----
-container/build.sh
-container/run.sh
+$ container/build.sh
+$ container/run.sh
 ----
 
 From inside the container, you can then run some workflows.
 
-[source, bash]
+[,console]
 ----
-pipx run nox -s dev   # Create a dev venv
-pipx run nox -s test  # run tests
-pipx run nox -s lint  # run linters
+$ pipx run nox -s dev   # Create a dev virtual-env
+$ pipx run nox -s test  # run tests
+$ pipx run nox -s lint  # run linters
 ----
+
+=== Useful resources
+
+* https://github.com/andreaslongo/learn-python
 
 == License
 

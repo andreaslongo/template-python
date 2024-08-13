@@ -1,5 +1,5 @@
-from hello_world.lib import hello_world
+from template_python.lib import say_hello
 
 
-def test_hello_world():
-    assert hello_world() == "Hello, world!"
+def test_greeting():
+    assert say_hello() == "Hi there."
