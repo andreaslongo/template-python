@@ -2,7 +2,7 @@
 **
 
 # Allow the following explicitly
-# !pixi.lock
-# !pixi.toml
-# !pyproject.toml
-# !src
+!pixi.lock
+!pixi.toml
+!pyproject.toml
+!src

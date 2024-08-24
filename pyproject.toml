@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.25.0,<2"]
 build-backend = "hatchling.build"
 
 # See more keys and their definitions at https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
@@ -7,30 +7,105 @@ build-backend = "hatchling.build"
 [project]
 name = "template_python"
 version = "0.1.0"
+description = "Add a short description here"
+authors = [{ name = "Andreas Longo", email="contact@andreaslongo.com" }]
 classifiers = ["Private :: Do Not Upload"]
-# dependencies = [
-#     "attrs",
-#     "cattrs",
-#     "httpx",
-# ]
 
 [project.scripts]
 template_python = "template_python.__cli__:main"
 
-[project.optional-dependencies]
-test = ["pytest", "pytest-cov", "hypothesis"]
-lint = ["ruff; platform_machine != 'aarch64'"]
+# See more keys and their definitions at https://pixi.sh/latest/reference/project_configuration/
 
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+# platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+
+# NOTE: All environments implicitly add the default feature.
+# To disable this set: no-default-feature = true.
+[tool.pixi.environments]
+# The default environment is DEV and has features for running in development,
+# testing and building.
+default = { solve-group = "default-group", features = ["dev", "build", "lint", "test"] }
+# A leaner PROD environment for use in production.
+prod = { solve-group = "default-group", features = ["prod"] }
+
+
+# Implicit default feature
+# NOTE: pixi throws an error if we name it explicitly:
+# [tool.pixi.feature.default]
+#
+# The main tasks for working with the project:
+[tool.pixi.tasks]
+# Run the dev task after making changes:
+dev = { depends-on = ["fmt", "git-hooks", "lint", "test"] }
+build = { depends-on = ["build_wheel"] }
+install = { depends-on = ["install_prod"] }
+start = { depends-on = ["run_prod"] }
+cli = { depends-on = ["run_cli_prod"] }
+clean = "rm -rf .coverage .pytest_cache/ .ruff_cache/ **/__pycache__/ dist/"
+[tool.pixi.dependencies]
+python = ">=3.9,<4"
+# attrs = ">=24.2.0,<25"
+# cattrs
+# httpx
+
+
+[tool.pixi.feature.dev]
+# Initialize a local DEV environment.
+[tool.pixi.feature.dev.pypi-dependencies]
+# Built editable in development mode
+template_python = { path = ".", editable = true }
+
+
+[tool.pixi.feature.prod]
+[tool.pixi.feature.prod.tasks]
+# Install into the production environment
+install_prod = "pip install --no-deps --no-cache-dir --disable-pip-version-check dist/template_python-*.whl"
+run_prod = "python -m template_python"
+run_cli_prod = "template_python"
+# Used for installing into production, as a post-process step.
+# TODO: Make better integration for this in the future.
+[tool.pixi.feature.prod.host-dependencies]
+pip = "*"
+
+
+[tool.pixi.feature.build]
+# Builds the package.
+[tool.pixi.feature.build.tasks]
+# Create a wheel for installation
+build_wheel = "python -m build --no-isolation --wheel ."
+# We use dependencies from conda to use it to build the wheel
+[tool.pixi.feature.build.dependencies]
+build = "*"
+hatchling = ">=1.25.0,<2"
+
+
+[tool.pixi.feature.lint]
+# Checks a package to catch common mistakes and improve your Python code.
+# Formats all Python files of the local package using ruff.
+[tool.pixi.feature.lint.tasks]
+fmt = "ruff format --diff --quiet ."
+lint = "ruff check ."
+git-hooks = "pre-commit run --all"
+git-hooks-update = "pre-commit autoupdate"
+[tool.pixi.feature.lint.dependencies]
+git = "*"  # required for running git hooks via pre-commit
+pre-commit = "*"
+ruff = "*"
+[tool.ruff.lint]
+select = ["E", "F", "B"]  # Enable flake8-bugbear (`B`) rules.
+ignore = ["E501"]         # Never enforce `E501` (line length violations).
+unfixable = ["B"]         # Avoid trying to fix flake8-bugbear (`B`) violations.
+
+
+[tool.pixi.feature.test]
+[tool.pixi.feature.test.tasks]
+test = "pytest -m 'not slow' --cov --cov-report term-missing"
+[tool.pixi.feature.test.dependencies]
+hypothesis = "*"
+pytest = "*"
+pytest-cov = "*"
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
-
-[tool.ruff.lint]
-# Enable flake8-bugbear (`B`) rules.
-select = ["E", "F", "B"]
-
-# Never enforce `E501` (line length violations).
-ignore = ["E501"]
-
-# Avoid trying to fix flake8-bugbear (`B`) violations.
-unfixable = ["B"]

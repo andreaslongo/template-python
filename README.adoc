@@ -20,7 +20,7 @@ and this project adheres to https://semver.org/spec/v2.0.0.html[Semantic Version
 The best way to get started is to build and run a local dev container.
 
 You can use https://podman.io[Podman] or any other OCI compliant container manager.
-The dev container has all the required dependencies for working with the project.
+The dev container has everything you need for working with the project.
 
 [,console]
 ----
@@ -28,14 +28,23 @@ $ container/build.sh
 $ container/run.sh
 ----
 
-From inside the container, you can then run some workflows.
+From inside the container, you can then run some tasks.
 
 [,console]
 ----
-$ pipx run nox -s dev   # Create a dev virtual-env
-$ pipx run nox -s test  # run tests
-$ pipx run nox -s lint  # run linters
+$ pixi run dev      # run checks and tests <- run this after making changes.
+$ pixi run build    # builds the app
+$ pixi run install  # installs the app in an isolated environment
+$ pixi run start    # runs the app
+$ pixi run clean    # remove cached project files
+$ pixi clean        # remove environments
 ----
+
+Tasks run in dependency isolated environments.
+The pixi tool manages all project dependencies for you.
+
+The container is recommended for running code in isolation, but it is not required.
+You can also https://pixi.sh/latest/#installation[install the package manager] and work directly with the project if you like.
 
 === Useful resources
 
