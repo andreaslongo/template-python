@@ -77,7 +77,7 @@ pip = "*"
 build_wheel = "python -m build --no-isolation --wheel ."
 # We use dependencies from conda to use it to build the wheel
 [tool.pixi.feature.build.dependencies]
-build = "*"
+python-build = "*"
 hatchling = ">=1.25.0,<2"
 
 
