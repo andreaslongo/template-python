@@ -106,7 +106,7 @@ RUN set -o errexit \
 
 FROM dev AS build
 
-# Copy the source code, pixi.toml, pyproject.toml and pixi.lock to the container.
+# Copy the source code, pixi.toml, pyproject.toml, Cargo.toml, Cargo.lock and pixi.lock to the container.
 # Controlled by Containerignore file.
 WORKDIR /home/appuser/app
 COPY --chown=appuser:appuser . .
