@@ -1,3 +1,7 @@
+TODO: Package app for deployment
+
+https://github.com/quantco/pixi-pack
+
 TODO: Cleanups
 
 Remove Python/Rust dirs
