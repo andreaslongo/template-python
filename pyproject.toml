@@ -88,7 +88,7 @@ hatchling = ">=1.25.0,<2"
 fmt = "ruff format --diff --quiet ."
 lint = "ruff check ."
 git-hooks = "pre-commit run --all"
-git-hooks-update = "pre-commit autoupdate"
+git-hooks-update = "pre-commit autoupdate --freeze"
 [tool.pixi.feature.lint.dependencies]
 git = "*"  # required for running git hooks via pre-commit
 pre-commit = "*"
