@@ -18,8 +18,7 @@ template_python = "template_python.__cli__:main"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["linux-64"]
-# platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
 
 # NOTE: All environments implicitly add the default feature.
 # To disable this set: no-default-feature = true.
@@ -35,16 +34,17 @@ prod = { solve-group = "default-group", features = ["prod"] }
 # Pixi throws an error if we name it explicitly, so we comment it out here.
 # [tool.pixi.feature.default]
 [tool.pixi.dependencies]
-python = ">=3.9,<4"
+python = ">=3.12.5,<4"
 # attrs = ">=24.2.0,<25"
-# cattrs = ">=23.2.3,<24"
-# httpx = ">=0.27.0,<1"
+# cattrs = ">=24.1.1,<25"
+# fire = ">=0.6.0,<0.7"
+# httpx = ">=0.27.2,<0.28"
 
 
 [tool.pixi.feature.dev]
 [tool.pixi.feature.dev.tasks]
 dev = { depends-on = ["fmt", "git-hooks", "lint", "test"] }
-clean = "rm -rf .coverage .pytest_cache/ .ruff_cache/ **/__pycache__/ dist/"
+clean = "rm -rf .coverage .pytest_cache/ .ruff_cache/ htmlcov/ dist/ **/__pycache__/"
 # Initialize a local DEV environment.
 [tool.pixi.feature.dev.pypi-dependencies]
 # Built editable in development mode
@@ -95,22 +95,25 @@ unfixable = ["B"]         # Avoid trying to fix flake8-bugbear (`B`) violations.
 
 [tool.pixi.feature.test]
 [tool.pixi.feature.test.tasks]
-test = "pytest -m 'not slow' --cov --cov-report term-missing"
+test = "pytest -m 'not slow' --cov=src --cov=tests --cov-report=term-missing --cov-branch"
 # For pytest-recording. This also shows how to disable some logs in the pytest output.
-# test-record = "pytest -m 'not slow' --cov --cov-report term-missing --record-mode=once --log-disable=vcr.cassette --log-disable=vcr.matchers --log-disable=vcr.request --log-disable=httpx"
+# test-record = "pytest -m 'not slow' --cov=src --cov=tests --cov-report=term-missing --cov-branch --record-mode=once --log-disable=vcr.cassette --log-disable=vcr.matchers --log-disable=vcr.request --log-disable=httpx"
 [tool.pixi.feature.test.dependencies]
-hypothesis = "*"
 pytest = "*"
 pytest-cov = "*"
+# https://hypothesis.readthedocs.io/en/latest/
+# hypothesis = "*"
+# https://github.com/lundberg/respx
+# respx = "*"
 # https://github.com/kiwicom/pytest-recording
 # pytest-recording = "*"
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
-log_cli = true
-log_cli_level = "DEBUG"
-log_cli_format = "%(asctime)s [%(levelname)8s] %(name)s %(message)s (%(filename)s:%(lineno)s)"
-log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+# log_cli = true
+# log_cli_level = "DEBUG"
+# log_cli_format = "%(asctime)s [%(levelname)8s] %(name)s %(message)s (%(filename)s:%(lineno)s)"
+# log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 # log_file = "pytest.log"
 # log_file_level = "DEBUG"
 # log_file_format = "%(asctime)s [%(levelname)8s] %(name)s %(message)s (%(filename)s:%(lineno)s)"
