@@ -65,7 +65,7 @@ template_python = { path = ".", editable = true }
 [tool.pixi.feature.prod]
 [tool.pixi.feature.prod.tasks]
 # Install into the production environment
-install = "pip install --no-deps --no-cache-dir --disable-pip-version-check dist/template_python-*.whl"
+install = "pip install --no-deps --no-cache-dir --disable-pip-version-check --force-reinstall dist/template_python-*.whl"
 start = "python -m template_python"
 cli = "template_python"
 # Used for installing into production, as a post-process step.
