@@ -10,6 +10,14 @@ version = "0.1.0"
 description = "Add a short description here"
 authors = [{ name = "Andreas Longo", email="contact@andreaslongo.com" }]
 classifiers = ["Private :: Do Not Upload"]
+# Make the package installable via pip:
+# requires-python = ">=3.12.5,<4"
+# dependencies = [
+#     "attrs >=24.2.0,<25",
+#     "cattrs >=24.1.1,<25",
+#     "fire >=0.6.0,<0.7",
+#     "httpx >=0.27.2,<0.28",
+# ]
 
 [project.scripts]
 template_python = "template_python.__cli__:main"
@@ -34,12 +42,15 @@ prod = { solve-group = "default-group", features = ["prod"] }
 # Pixi throws an error if we name it explicitly, so we comment it out here.
 # [tool.pixi.feature.default]
 [tool.pixi.dependencies]
-python = ">=3.12.5,<4"
+python = ">=3.12.7,<4"
 # attrs = ">=24.2.0,<25"
 # cattrs = ">=24.1.1,<25"
 # fire = ">=0.6.0,<0.7"
 # httpx = ">=0.27.2,<0.28"
 
+# Dependency from git
+# [tool.pixi.pypi-dependencies]
+# lib = { git = "https://github.com/andreaslongo/lib.git" }
 
 [tool.pixi.feature.dev]
 [tool.pixi.feature.dev.tasks]
@@ -95,9 +106,9 @@ unfixable = ["B"]         # Avoid trying to fix flake8-bugbear (`B`) violations.
 
 [tool.pixi.feature.test]
 [tool.pixi.feature.test.tasks]
-test = "pytest -m 'not slow' --cov=src --cov=tests --cov-report=term-missing --cov-branch"
+test = "pytest"
 # For pytest-recording. This also shows how to disable some logs in the pytest output.
-# test-record = "pytest -m 'not slow' --cov=src --cov=tests --cov-report=term-missing --cov-branch --record-mode=once --log-disable=vcr.cassette --log-disable=vcr.matchers --log-disable=vcr.request --log-disable=httpx"
+# test-record = "pytest --record-mode=once --log-disable=vcr.cassette --log-disable=vcr.matchers --log-disable=vcr.request --log-disable=httpx"
 [tool.pixi.feature.test.dependencies]
 pytest = "*"
 pytest-cov = "*"
@@ -108,7 +119,7 @@ pytest-cov = "*"
 # https://github.com/kiwicom/pytest-recording
 # pytest-recording = "*"
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib"]
+addopts = "-m 'not slow' --import-mode=importlib --cov=src --cov=tests --cov-report=term-missing --cov-branch"
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
 # log_cli = true
 # log_cli_level = "DEBUG"
