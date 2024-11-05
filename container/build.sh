@@ -27,8 +27,10 @@ podman image build \
     --tag="$(basename ${parent_dir})":"$(date --iso-8601)" \
     --tag="$(basename ${parent_dir})":latest \
     --target=dev \
-    --volume "${HOME}/.cache/huggingface:/root/.cache/huggingface:z,rw" \
-    --volume "${HOME}/.cache/pre-commit:/root/.cache/pre-commit:z,rw" \
-    --volume "${HOME}/.cache/rattler:/root/.cache/rattler:z,rw" \
-    --volume "${HOME}/.pixi:/root/.pixi:z,rw" \
+    --volume "${HOME}/.cache/huggingface:/home/appuser/.cache/huggingface:z,rw" \
+    --volume "${HOME}/.cache/pre-commit:/home/appuser/.cache/pre-commit:z,rw" \
+    --volume "${HOME}/.cache/rattler:/home/appuser/.cache/rattler:z,rw" \
+    --volume "${HOME}/.cargo:/home/appuser/.cargo:z,rw" \
+    --volume "${HOME}/.pixi:/home/appuser/.pixi:z,rw" \
+    --volume "${HOME}/.rustup:/home/appuser/.rustup:z,rw" \
         "${parent_dir}"
