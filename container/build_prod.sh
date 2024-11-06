@@ -19,7 +19,8 @@ readonly local parent_dir=$(dirname ${script_dir})
 # Use --pull=always to do this also for images without `latest` tags.
 # NOTE: We use cache dirs to speed up the build process. Named volumes not
 # supported during build, only bind-mounts are. We mount at /root to workaround
-# a non-root user issue, see Containerfile > TODO.
+# a non-root user issue, see Containerfile > USER root.
+# TODO: Use container build cache instead of bind mounts?
 podman image build \
     --build-arg=BASE_IMAGE="${base_image}" \
     --file="${script_dir}/Containerfile" \
