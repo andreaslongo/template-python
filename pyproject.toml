@@ -10,7 +10,9 @@ version = "0.1.0"
 description = "Add a short description here"
 authors = [{ name = "Andreas Longo", email="contact@andreaslongo.com" }]
 classifiers = ["Private :: Do Not Upload"]
-# Make the package installable via pip:
+
+# Make the package installable via pip.
+# Keep this in sync with [tool.pixi.dependencies]:
 # requires-python = ">=3.12.5,<4"
 # dependencies = [
 #     "attrs >=24.2.0,<25",

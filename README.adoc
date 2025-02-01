@@ -52,6 +52,6 @@ You can also https://pixi.sh/latest/#installation[install the package manager] a
 
 == License
 
-Copyright (C) 2024 Andreas Longo
+Copyright (C) 2025 Andreas Longo
 
 GNU General Public License v3.0 or later
