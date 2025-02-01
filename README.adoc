@@ -4,6 +4,12 @@
 
 == Getting started
 
+[,console]
+----
+$ pixi run build && pixi run install
+$ pixi run start
+----
+
 == Features
 
 == Changelog

@@ -1,5 +1,6 @@
 # pixi environments
 .pixi
+*.egg-info
 
 # https://github.com/github/gitignore/blob/main/Python.gitignore
 # Commit: 8e67b94
