@@ -5,7 +5,7 @@ log = logging.getLogger(__name__)
 
 
 def main():
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.ERROR)
 
     try:
         run()
