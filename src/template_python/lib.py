@@ -20,7 +20,7 @@ def init_log(verbose: int = 0, logfile: Path | None = None) -> None:
 
     Parameters:
     verbose (int): Verbosity level of logging.
-             default - ERROR
+                   0 - ERROR
                    1 - WARNING
                    2 - INFO
                    3 or higher - DEBUG
@@ -34,14 +34,14 @@ def init_log(verbose: int = 0, logfile: Path | None = None) -> None:
     timestamp is formatted according to RFC3339.
     """
     match verbose:
+        case 0:
+            level = logging.ERROR
         case 1:
             level = logging.WARNING
         case 2:
             level = logging.INFO
-        case _ if verbose >= 3:
-            level = logging.DEBUG
         case _:
-            level = logging.ERROR
+            level = logging.DEBUG
 
     format = "[%(asctime)s %(levelname)-8s %(name)s] %(message)s"
     RFC3339 = "%Y-%m-%dT%H:%M:%SZ"

@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 
 def run():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Template: Python CLI")
     parser.add_argument(
         "-v", "--verbose", action="count", default=0, help="Increase verbosity level"
     )
