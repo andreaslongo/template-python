@@ -1,14 +1,12 @@
 import logging
-from template_python.cli import run
+from template_python import cli
 
 log = logging.getLogger(__name__)
 
 
 def main():
-    logging.basicConfig(level=logging.ERROR)
-
     try:
-        run()
+        cli.run()
     except Exception as e:
         log.error(f"An error occurred: {e}")
 

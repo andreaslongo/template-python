@@ -7,8 +7,6 @@ build-backend = "hatchling.build"
 [project]
 name = "template_python"
 version = "0.0.0"
-description = "Add a short description here"
-authors = [{ name = "Andreas Longo", email="contact@andreaslongo.com" }]
 classifiers = ["Private :: Do Not Upload"]
 
 # Make the package installable via pip.
@@ -22,13 +20,14 @@ classifiers = ["Private :: Do Not Upload"]
 # ]
 
 [project.scripts]
-template_python = "template_python.__cli__:main"
+template_python = "template_python.__main__:main"
 
 # See more keys and their definitions at https://pixi.sh/latest/reference/project_configuration/
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+# platforms = ["linux-64", "osx-arm64", "osx-64", "win-64"]
+platforms = ["linux-64", "win-64"]
 
 # NOTE: All environments implicitly add the default feature.
 # To disable this set: no-default-feature = true.
@@ -68,8 +67,9 @@ template_python = { path = ".", editable = true }
 [tool.pixi.feature.prod.tasks]
 # Install into the production environment
 install = { cmd = "pip install --no-deps --no-cache-dir --disable-pip-version-check --force-reinstall dist/template_python-*.whl", depends-on = ["build"] }
-start = { cmd = "python -m template_python", depends-on = ["build", "install"] }
-cli = { cmd = "template_python", depends-on = ["build", "install"] }
+module = { cmd = "python -m template_python", depends-on = ["build", "install"] }
+script = { cmd = "template_python", depends-on = ["build", "install"] }
+app = { cmd = "template_python", depends-on = ["build", "install"] }
 # Used for installing into production, as a post-process step.
 # TODO: Make better integration for this in the future.
 [tool.pixi.feature.prod.host-dependencies]

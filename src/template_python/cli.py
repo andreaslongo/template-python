@@ -1,9 +1,23 @@
+from pathlib import Path
 import argparse
-from template_python.lib import say_hello
+import logging
+from template_python import lib
+
+
+log = logging.getLogger(__name__)
 
 
 def run():
     parser = argparse.ArgumentParser()
-    _args = parser.parse_args()
+    parser.add_argument(
+        "-v", "--verbose", action="count", default=0, help="Increase verbosity level"
+    )
+    parser.add_argument(
+        "--logfile",
+        type=Path,
+        help="Write log messages to a file (e.g., ./logfile.txt)",
+    )
+    args = parser.parse_args()
+    lib.init_log(args.verbose, args.logfile)
 
-    print(say_hello())
+    lib.run_app()

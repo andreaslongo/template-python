@@ -1,5 +1,5 @@
-from template_python.lib import say_hello
+from template_python import lib
 
 
 def test_greeting():
-    assert say_hello() == "Hi there."
+    assert lib.say_hello() == "Hi there."
