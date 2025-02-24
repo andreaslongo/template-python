@@ -40,8 +40,8 @@ From inside the container, you can then run some tasks.
 $ pixi run dev      # run checks and tests <- run this after making changes.
 $ pixi run build    # builds the app
 $ pixi run install  # installs the app in an isolated environment
-$ pixi run main     # runs the main module
-$ pixi run cli      # runs the cli module
+$ pixi run module   # runs the main module
+$ pixi run script   # runs the main script
 $ pixi run clean    # remove cached project files
 $ pixi clean        # remove environments
 ----
